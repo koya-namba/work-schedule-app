@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="card text-center contact mx-auto rounded mb-5 pd-5">
+    <div class="card-body">
+        <h2 class="mb-4">スタッフログイン</h2>
+        <div>
+            <a href="{% url 'staff:staff_login' %}" class="btn btn-warning"><i class="fas fa-check">　ログイン画面</i></a>
+        </div>
+    </div>
+</div>
+<div class="card text-center contact mx-auto rounded">
+    <div class="card-body">
+        <h2 class="mb-4">管理者ログイン</h2>
+        <div>
+            <a href="{% url 'staff:manager_login' %}" class="btn btn-warning"><i class="fas fa-check">　ログイン画面</i></a>
+        </div>
+    </div>
+</div>
+{% endblock %}

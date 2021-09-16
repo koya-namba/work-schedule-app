@@ -1,0 +1,28 @@
+{% extends 'staff/staff_base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="card text-center contact mx-auto rounded">
+    <div class="card-body">
+        <h2 class="mb-4">シフト登録</h2>
+        {% if messages %}
+            {% for message in messages %}
+                <div>{{ message.message }}</div>
+            {% endfor %}
+        {% endif %}
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                {% render_field form.date class='form-control' placeholder='Date' %}
+            </div>
+            <div class="mb-3">
+                {% render_field form.shift_name class='form-control' placeholder='Shift Name' %}
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-warning mr-4" type="submit"><i class="fas fa-paper-plane"> 登録する</i></button>
+                <a href="{% url 'schedule:staff_schedule' %}" class="btn btn-danger mr-3"><i class="fas fa-times"> キャンセル</i></a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

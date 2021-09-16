@@ -1,0 +1,36 @@
+{% extends 'staff/manager_base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+{% if messages %}
+    {% for message in messages %}
+        <div>{{ message.message }}</div>
+    {% endfor %}
+{% endif %}
+<div class="card text-center contact mx-auto rounded mb-5 pd-5">
+    <div class="card-body">
+        <p class="mb-4">全スタッフのシフト確認・変更・登録はこちら</p>
+        <div>
+            <a href="{% url 'schedule:manager_all_schedule' %}" class="btn btn-warning"><i class="fas fa-calendar-check">　シフト確認</i></a>
+        </div>
+    </div>
+</div>
+
+<div class="card text-center contact mx-auto rounded mb-5 pd-5">
+    <div class="card-body">
+        <p class="mb-4">全スタッフの情報確認・変更・登録はこちらから</p>
+        <div>
+            <a href="{% url 'staff:manager_staff_list' %}" class="btn btn-warning"><i class="fas fa-clipboard">　個人情報確認</i></a>
+        </div>
+    </div>
+</div>
+
+<div class="card text-center contact mx-auto rounded">
+    <div class="card-body">
+        <p class="mb-4">スタッフページへはこちらから</p>
+        <div>
+            <a href="{% url 'staff:staff_home' %}" class="btn btn-warning"><i class="fas fa-address-card">　スタッフページ</i></a>
+        </div>
+    </div>
+</div>
+{% endblock %}

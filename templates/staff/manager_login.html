@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="card text-center contact mx-auto rounded">
+    <div class="card-body">
+        <h2 class="mb-4">管理者ログイン</h2>
+        {% if messages %}
+            {% for message in messages %}
+                <div>{{ message.message }}</div>
+            {% endfor %}
+        {% endif %}
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                {% render_field form.employee_id class='form-control' placeholder='ID' %}
+            </div>
+            <div class="mb-3">
+                {% render_field form.password class='form-control' placeholder='PassWord' %}
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-warning" type="submit"><i class="fas fa-paper-plane"> 送信する</i></button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

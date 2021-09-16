@@ -1,0 +1,41 @@
+{% extends 'staff/manager_base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<a href="{% url 'staff:manager_staff_regist' %}" class="mt-3 mb-3 pt-2 pb-2b btn btn-outline-dark"> 新規スタッフ追加</a>
+<table class="table table-striped text-center">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>氏名</th>
+            <th>誕生日</th>
+            <th>電話番号</th>
+            <th>メールアドレス</th>
+            <th>郵便番号</th>
+            <th>管理者</th>
+            <th>詳細</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for object in object_list %}
+            <tr>
+                <td>{{ object.employee_id }}</td>
+                <td>{{ object.name }}</td>
+                <td>{{ object.birthday }}</td>
+                <td>{{ object.tel_number }}</td>
+                <td>{{ object.email }}</td>
+                <td>{{ object.zipcode }}</td>
+                <td>
+                    {% if object.is_staff %}
+                        <i class="fas fa-check"></i>
+                    {% else %}
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'staff:manager_staff_detail' object.id %}" class="btn btn-outline-dark">詳細</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

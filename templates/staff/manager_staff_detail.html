@@ -1,0 +1,52 @@
+{% extends 'staff/manager_base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="card text-center contact mx-auto rounded mb-5 pd-5">
+    <div class="card-body">
+        <h3 class="mb-3">詳細情報</h3>
+        <table class="table text-left information all-center mb-4">
+          <tbody>
+            <tr>
+              <th scope="row">ID</th>
+              <td>{{ object.employee_id }}</td>
+            </tr>
+            <tr>
+              <th scope="row">氏名</th>
+              <td>{{ object.name }}</td>
+            </tr>
+            <tr>
+              <th scope="row">誕生日</th>
+              <td>{{ object.birthday }}</td>
+            </tr>
+            <tr>
+              <th scope="row">電話番号</th>
+              <td>{{ object.tel_number }}</td>
+            </tr>
+            <tr>
+              <th scope="row">メール</th>
+              <td>{{ object.email }}</td>
+            </tr>
+            <tr>
+              <th scope="row">郵便番号</th>
+              <td>{{ object.zipcode }}</td>
+            </tr>
+            <tr>
+              <th scope="row">管理者</th>
+              <td>{{ object.is_staff }}</td>
+            </tr>
+            <tr>
+              <th scope="row">スタッフ</th>
+              <td>{{ object.is_active }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="mb-3 all-center">
+            <a href="{% url 'staff:manager_staff_update' object.id %}" class="btn btn-warning mr-3"> 更新</a>
+            <a href="{% url 'staff:manager_staff_delete' object.id %}" class="btn btn-danger mr-3"> 削除</a>
+            <a href="{% url 'staff:manager_staff_list' %}" class="btn btn-dark"> キャンセル</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
