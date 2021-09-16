@@ -173,4 +173,4 @@ lib*.pc
 /Release/
 /tmp_install/
 
-work-schedule-app/staticfiles/
+staticfiles
