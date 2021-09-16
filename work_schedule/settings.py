@@ -88,10 +88,16 @@ DATABASES = {
     }
 }
 
-# 追記
-import dj_database_url
-db_from_env = dj_database_url.config()
-DATABASES['default'].update(db_from_env)
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'name',
+        'USER': 'user',
+        'PASSWORD': '',
+        'HOST': 'host',
+        'PORT': '',
+    }
+}
 
 # DATABASES = {
 #     'default': {
@@ -160,5 +166,6 @@ except ImportError:
     pass
 
 if not DEBUG:
+    SECRET_KEY = os.environ[SECRET_KEY]
     import django_heroku
     django_heroku(locals())
