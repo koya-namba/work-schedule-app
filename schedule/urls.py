@@ -19,6 +19,6 @@ urlpatterns = [
         'staff_schedule_day_regist/<int:year>/<int:month>/<int:day>',
         StaffScheduleDayRegistView.as_view(), name='staff_schedule_day_regist'
     ),
-    path('staff_schedule_update/<int:pk>', StaffScheduleUpdateView.as_view(), name='staff_schedule_update'),
-    path('staff_schedule_delete/<int:pk>', StaffScheduleDeleteView.as_view(), name='staff_schedule_delete'),
+    path('staff_schedule_update/<int:pk>/', StaffScheduleUpdateView.as_view(), name='staff_schedule_update'),
+    path('staff_schedule_delete/<int:pk>/', StaffScheduleDeleteView.as_view(), name='staff_schedule_delete'),
 ]
