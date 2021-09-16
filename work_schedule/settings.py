@@ -12,7 +12,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 import os
 from pathlib import Path
-import django_heroku
+from decouple import config
+from dj_database_url import parse as dburl
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,7 +29,7 @@ STATIC_DIR = os.path.join(BASE_DIR, 'static')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -81,15 +82,10 @@ AUTH_USER_MODEL = 'staff.User'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+default_dburl = 'sqlite:///' + str(BASE_DIR / 'db.sqlite3')
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'work-schedule-app',
-        'USER': 'koya',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
+    'default': config("DATABASE_URL", default=default_dburl, cast=dburl),
 }
 
 # Password validation
@@ -135,10 +131,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     STATIC_DIR,
 ]
+STATIC_ROOT = str(BASE_DIR / 'staticfiles')
 
 LOGIN_URL = '/staff/'
-
-django_heroku.settings(locals())
 
 try:
     from .local_settings import *
