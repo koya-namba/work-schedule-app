@@ -24,10 +24,7 @@ class CustomizeUserAdmin(UserAdmin):
     )
     add_fieldsets = (
         ('ユーザ情報', {
-            'fields': (
-                'employee_id', 'name', 'birthday', 'email',
-                'tel_number', 'zipcode', 'password', 'confirm_password'
-            )
+            'fields': ('employee_id', 'password', 'confirm_password')
         }),
     )
 
