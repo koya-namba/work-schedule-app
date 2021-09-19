@@ -1,2 +1,1 @@
-python manage.py migrate
-web: gunicorn work-schedule-app.wsgi --log-file -
+web: gunicorn work_schedule.wsgi --log-file -
