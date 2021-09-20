@@ -10,19 +10,19 @@
         <form method="POST">
             {% csrf_token %}
             <div class="mb-3">
-                {% render_field form.name class='form-control' placeholder='ID' %}
+                {% render_field form.name class='form-control' placeholder='Name' %}
             </div>
              <div class="mb-3">
-                {% render_field form.birthday class='form-control' placeholder='ID' %}
+                {% render_field form.birthday class='form-control' placeholder='BirthDay' %}
             </div>
              <div class="mb-3">
-                {% render_field form.email class='form-control' placeholder='ID' %}
+                {% render_field form.email class='form-control' placeholder='Email' %}
             </div>
              <div class="mb-3">
-                {% render_field form.tel_number class='form-control' placeholder='ID' %}
+                {% render_field form.tel_number class='form-control' placeholder='TEL Number' %}
             </div>
             <div class="mb-5">
-                {% render_field form.zipcode class='form-control' placeholder='PassWord' %}
+                {% render_field form.zipcode class='form-control' placeholder='Zipcode' %}
             </div>
             <div class="mb-3">
                 <button class="btn btn-warning mr-3" type="submit"><i class="fa"> 更新</i></button>

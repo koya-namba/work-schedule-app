@@ -173,4 +173,5 @@ lib*.pc
 /Release/
 /tmp_install/
 
-staticfiles
+work_schedule/settings/local.py
+staticfiles/
