@@ -9,9 +9,17 @@
 {% endif %}
 <div class="card text-center contact mx-auto rounded mb-5 pd-5">
     <div class="card-body">
-        <p class="mb-4">シフトの確認・変更・登録はこちら</p>
+        <p class="mb-4">承認済みシフトの確認はこちら</p>
         <div>
-            <a href="{% url 'schedule:staff_schedule' %}" class="btn btn-warning"><i class="fas fa-calendar-check">　シフト確認</i></a>
+            <a href="{% url 'schedule:staff_approved_schedule' %}" class="btn btn-warning"><i class="fas fa-calendar-check">　シフト確認</i></a>
+        </div>
+    </div>
+</div>
+<div class="card text-center contact mx-auto rounded mb-5 pd-5">
+    <div class="card-body">
+        <p class="mb-4">シフト申請・変更・削除はこちら</p>
+        <div>
+            <a href="{% url 'schedule:staff_application_schedule' %}" class="btn btn-warning"><i class="fas fa-calendar-alt">　シフト申請</i></a>
         </div>
     </div>
 </div>

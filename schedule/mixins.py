@@ -1,6 +1,7 @@
 import calendar
 import datetime
 
+from .models import Status
 from staff.models import User
 
 
@@ -48,8 +49,8 @@ class MonthMixin:
         return calendar_data
 
 
-class ManagerAllScheduleMixin(MonthMixin):
-    """スケジュール付きの、月の情報を提供するMixin"""
+class ManagerApplicationAllScheduleMixin(MonthMixin):
+    """申請中スケジュール、月の情報を提供するMixin"""
 
     def get_month_schedules(self, start, end, days, staff_list):
         """スタッフごとにそれぞれの日とスケジュールを返す"""
@@ -88,8 +89,56 @@ class ManagerAllScheduleMixin(MonthMixin):
         return calendar_context
 
 
-class StaffScheduleMixin(MonthMixin):
-    """ログインしているスタッフのスケジュール付きの、月の情報を提供するMixin"""
+class ManagerApprovedAllScheduleMixin(MonthMixin):
+    """承認済みスケジュール付きの、月の情報を提供するMixin"""
+
+    def get_month_schedules(self, start, end, days, staff_list):
+        """スタッフごとに承認済みの日とスケジュールを返す"""
+        lookup = {
+            # date__range: (1日, 31日)'を動的に作る
+            '{}__range'.format(self.date_field): (start, end),
+        }
+        # 申請を承認する
+        applications = self.model.objects.filter(**lookup)
+        approved_all = []
+        for application in applications:
+            application.status = Status.objects.get(status='approved')
+            approved_all.append(application)
+        self.model.objects.bulk_update(approved_all, fields=['status'])
+
+        staff_all_schedule = {}
+        # Schedule.objects.filter(date__range=(1日, 31日), staff=staff)
+        for staff in staff_list:
+            queryset = self.model.objects.filter(**lookup, staff=staff)
+            # {1日のdatetime: 1日のスケジュール, 2日のdatetime: 2日の...}の辞書を作る
+            day_schedules = {day: [] for day in days}
+
+            for schedule in queryset:
+                schedule_date = getattr(schedule, self.date_field)
+                day_schedules[schedule_date].append(schedule)
+
+            staff_all_schedule[staff] = day_schedules
+
+        return staff_all_schedule
+
+    def get_month_calendar(self):
+        """その月に関する情報とスタッフのリストを返す"""
+        calendar_context = super().get_month_calendar()
+        month_days = calendar_context['month_days']
+        month_first = month_days[0]
+        month_last = month_days[-1]
+        staff_list = User.objects.all().order_by('employee_id')
+        calendar_context['month_day_schedules'] = self.get_month_schedules(
+            month_first,
+            month_last,
+            month_days,
+            staff_list
+        )
+        return calendar_context
+
+
+class StaffApplicationScheduleMixin(MonthMixin):
+    """ログインしているスタッフの申請中スケジュール付きの、月の情報を提供するMixin"""
 
     def get_month_schedules(self, start, end, days, staff):
         """それぞれの日とスケジュールを返す"""
@@ -99,6 +148,42 @@ class StaffScheduleMixin(MonthMixin):
         }
         # Schedule.objects.filter(date__range=(1日, 31日), staff=staff)
         queryset = self.model.objects.filter(**lookup, staff=staff)
+        # {1日のdatetime: 1日のスケジュール, 2日のdatetime: 2日の...}の辞書を作る
+        day_schedules = {day: [] for day in days}
+
+        for schedule in queryset:
+            schedule_date = getattr(schedule, self.date_field)
+            day_schedules[schedule_date].append(schedule)
+
+        return day_schedules
+
+    def get_month_calendar(self):
+        """その月に関する情報とログインしているスタッフを返す"""
+        calendar_context = super().get_month_calendar()
+        month_days = calendar_context['month_days']
+        month_first = month_days[0]
+        month_last = month_days[-1]
+        staff = self.request.user
+        calendar_context['month_day_schedules'] = self.get_month_schedules(
+            month_first,
+            month_last,
+            month_days,
+            staff
+        )
+        return calendar_context
+
+
+class StaffApprovedScheduleMixin(MonthMixin):
+    """ログインしているスタッフの承認済みスケジュール付きの、月の情報を提供するMixin"""
+
+    def get_month_schedules(self, start, end, days, staff):
+        """それぞれの日と承認済みスケジュールを返す"""
+        lookup = {
+            # date__range: (1日, 31日)'を動的に作る
+            '{}__range'.format(self.date_field): (start, end),
+        }
+        # Schedule.objects.filter(date__range=(1日, 31日), staff=staff)
+        queryset = self.model.objects.filter(**lookup, staff=staff, status=Status.objects.get(status='approved'))
         # {1日のdatetime: 1日のスケジュール, 2日のdatetime: 2日の...}の辞書を作る
         day_schedules = {day: [] for day in days}
 

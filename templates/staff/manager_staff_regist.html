@@ -37,7 +37,8 @@
                 {% render_field form.confirm_password class='form-control' placeholder='Confirm Password' %}
             </div>
             <div class="mb-3">
-                <button class="btn btn-warning" type="submit"><i class="fas fa-paper-plane"> 登録する</i></button>
+                <button class="btn btn-warning mr-3" type="submit"><i class="fas">登録する</i></button>
+                <a href="{% url 'staff:manager_staff_list' %}" class="btn btn-danger"><i class="fa">キャンセル</i></a>
             </div>
         </form>
     </div>

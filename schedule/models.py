@@ -15,6 +15,15 @@ class Shift(models.Model):
         return self.name
 
 
+class Status(models.Model):
+    """スケジュールが申請中か承認済か確認するモデル"""
+    id = models.AutoField(primary_key=True)
+    status = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.status
+
+
 class Schedule(models.Model):
     """スケジュールの詳細に関するモデル"""
 
@@ -22,13 +31,10 @@ class Schedule(models.Model):
     staff = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField()
     shift_name = models.ForeignKey(Shift, on_delete=models.CASCADE, related_name='シフト名')
+    status = models.ForeignKey(Status, on_delete=models.CASCADE, related_name='状態')
 
     def __str__(self):
         return f'{self.date}'
 
     class Meta:
         unique_together = [['staff', 'date']]
-
-
-
-

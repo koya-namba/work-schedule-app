@@ -2,33 +2,39 @@
 {% load widget_tweaks %}
 
 {% block content %}
-    <a href="{% url 'schedule:manager_all_schedule' month_previous.year month_previous.month %}" class="text-dark">前月</a>
-    <span class="h3 mr-3 ml-3">{{ month_current | date:"Y年m月" }}</span>
-    <a href="{% url 'schedule:manager_all_schedule' month_next.year month_next.month %}" class="text-dark">次月</a>
-    <table class="table table-bordered mt-3 text-center">
-        <thead>
+<a href="{% url 'schedule:manager_approved' month_current.year month_current.month %}" class="text-dark float-right mr-5 btn btn-warning"><i class="fas fa-check">　承認</i></a>
+<a href="{% url 'schedule:manager_schedule_regist' %}" class="text-dark float-right mr-3 btn btn-warning"><i class="fas fa-plus">　シフト追加</i></a>
+<a href="{% url 'schedule:manager_application' month_previous.year month_previous.month %}" class="text-dark">前月</a>
+<span class="h3 mr-3 ml-3">{{ month_current | date:"Y年m月" }}</span>
+<a href="{% url 'schedule:manager_application' month_next.year month_next.month %}" class="text-dark">次月</a>
+<table class="table table-bordered text-center mt-3">
+    <thead>
+        <tr>
+            <td></td>
+            {% for day in month_days %}
+                <th scope="col" class="small">{{ day.day }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for staff, staff_schedules in month_day_schedules.items %}
             <tr>
-                <td></td>
-                {% for day in month_days %}
-                    <th scope="col" class="small">{{ day.day }}</th>
+                <th scope="row" class="small">{{ staff.name }}</th>
+                {% for schedules in staff_schedules.values%}
+                    {% if not schedules %}
+                        <td></td>
+                    {% else %}
+                        {% for schedule in schedules %}
+                            {% if schedule.status|stringformat:"s" == "application" %}
+                                <td class="small bg-warning"><a href="{% url 'schedule:manager_schedule_detail' schedule.id %}" class="text-dark">{{ schedule.shift_name }}</a></td>
+                            {% else %}
+                                <td class="small"><a href="{% url 'schedule:manager_schedule_detail' schedule.id %}" class="text-dark">{{ schedule.shift_name }}</a></td>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
                 {% endfor %}
             </tr>
-        </thead>
-        <tbody>
-            {% for staff, staff_schedules in month_day_schedules.items %}
-                <tr>
-                    <th scope="row" class="small">{{ staff.name }}</th>
-                    {% for schedules in staff_schedules.values%}
-                        {% if not schedules %}
-                            <td></td>
-                        {% else %}
-                            {% for schedule in schedules %}
-                                <td class="small">{{ schedule.shift_name }}</td>
-                            {% endfor %}
-                        {% endif %}
-                    {% endfor %}
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
