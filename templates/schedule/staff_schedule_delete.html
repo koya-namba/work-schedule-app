@@ -8,7 +8,7 @@
             {%csrf_token %}
             <p>{{ object.date }} : {{ object.shift_name }}を削除してよろしいですか</p>
             <input type="submit" value="削除" class="btn btn-danger mr-3">
-            <a href="{% url 'schedule:staff_schedule' %}" class="btn btn-dark"> キャンセル</a>
+            <a href="{% url 'schedule:staff_application_schedule' %}" class="btn btn-dark"> キャンセル</a>
         </form>
     </div>
 </div>

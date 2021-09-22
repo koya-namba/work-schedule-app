@@ -1,0 +1,26 @@
+{% extends 'staff/manager_base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="card text-center contact mx-auto rounded">
+    <div class="card-body">
+        <h2 class="mb-4">シフト更新</h2>
+        <div class="mb-3">
+            日にち：{{ object.date }}
+        </div>
+        <div class="mb-3">
+            氏名：{{ object.staff.name }}
+        </div>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                {% render_field form.shift_name class='form-control' %}
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-warning mr-3" type="submit"><i class="fa">更新</i></button>
+                <a href="{% url 'schedule:manager_schedule_detail' object.id %}" class="btn btn-danger"><i class="fa">キャンセル</i></a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

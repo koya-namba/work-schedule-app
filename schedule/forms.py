@@ -4,20 +4,40 @@ from django.contrib.admin.widgets import AdminDateWidget
 from .models import Schedule
 
 
-class StaffScheduleRegistForm(forms.ModelForm):
-    """スタッフが日付を指定してスケジュールを作成するフォーム"""
+class ManagerScheduleRegistForm(forms.ModelForm):
+    """管理者がスケジュールを作成するフォーム
+    statusの初期値はapplication
+    """
 
     class Meta:
         model = Schedule
-        fields = ('date', 'shift_name')
-        widgets = {
-            'date': AdminDateWidget(),
-        }
+        fields = ('date', 'staff', 'shift_name',)
+
+    def save(self, commit=False):
+        schedule = super().save(commit=False)
+        schedule.save()
+        return schedule
+
+
+class ManagerScheduleUpdateForm(forms.ModelForm):
+    """管理者がスケジュールを更新するフォーム
+    statusの初期値はapplication
+    """
+
+    class Meta:
+        model = Schedule
+        fields = ('shift_name',)
+
+    def save(self, commit=False):
+        schedule = super().save(commit=False)
+        schedule.save()
+        return schedule
 
 
 class StaffScheduleDayRegistForm(forms.ModelForm):
     """スタッフが日付からスケジュールを作成するフォーム
     URLから日付を取得するためスタッフが入力する必要なし
+    statusの初期値はapplication
     """
 
     class Meta:
@@ -38,7 +58,9 @@ class StaffScheduleDayRegistForm(forms.ModelForm):
 
 
 class StaffScheduleUpdateForm(forms.ModelForm):
-    """スタッフがスケジュールを更新するフォーム"""
+    """スタッフがスケジュールを更新するフォーム
+    statusの初期値はapplication
+    """
 
     class Meta:
         model = Schedule

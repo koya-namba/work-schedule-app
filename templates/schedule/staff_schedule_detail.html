@@ -1,0 +1,29 @@
+{% extends 'staff/staff_base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="card text-center contact mx-auto rounded">
+    <div class="card-body">
+        <h2 class="mb-4">シフト確認</h2>
+        <div class="mb-3">
+            日にち：{{ object.date }}
+        </div>
+        <div class="mb-5">
+            シフト：{{ object.shift_name }}
+        </div>
+        {% if object.status|stringformat:"s" == "approved"%}
+            <p class="mb-3 all-center">承認済みのため，変更できません．</p>
+            <p class="mb-3 all-center">シフト変更・削除は，店長に直接お願いします．</p>
+            <div class="mb-3 all-center">
+                <a href="{% url 'schedule:staff_application_schedule' %}" class="btn btn-dark"> 戻る</a>
+            </div>
+        {% else %}
+            <div class="mb-3 all-center">
+                <a href="{% url 'schedule:staff_schedule_update' object.id %}" class="btn btn-warning mr-3"> 更新</a>
+                <a href="{% url 'schedule:staff_schedule_delete' object.id %}" class="btn btn-danger mr-3"> 削除</a>
+                <a href="{% url 'schedule:staff_application_schedule' %}" class="btn btn-dark"> キャンセル</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

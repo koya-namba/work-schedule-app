@@ -1,0 +1,24 @@
+{% extends 'staff/manager_base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="card text-center contact mx-auto rounded">
+    <div class="card-body">
+        <h2 class="mb-4">シフト確認</h2>
+        <div class="mb-3">
+            日にち：{{ object.date }}
+        </div>
+        <div class="mb-3">
+            スタッフ名：{{ object.staff.name }}
+        </div>
+        <div class="mb-5">
+            シフト：{{ object.shift_name }}
+        </div>
+        <div class="mb-3 all-center">
+            <a href="{% url 'schedule:manager_schedule_update' object.id %}" class="btn btn-warning mr-3"> 更新</a>
+            <a href="{% url 'schedule:manager_schedule_delete' object.id %}" class="btn btn-danger mr-3"> 削除</a>
+            <a href="{% url 'schedule:manager_application' %}" class="btn btn-dark"> キャンセル</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
