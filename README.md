@@ -29,12 +29,12 @@
  
 # Requirement
  
-dj-database-url 0.5.0  
-Django 3.1.13  
-django-widget-tweaks 1.4.8   
-gunicorn 20.1.0  
-psycopg2 2.9.1  
-whitenoise 5.3.0
+dj-database-url  0.5.0  
+Django  3.1.13  
+django-widget-tweaks  1.4.8   
+gunicorn  20.1.0  
+psycopg2  2.9.1  
+whitenoise  5.3.0
 
 # Installation
  
@@ -50,7 +50,7 @@ cd work-schedule-app/work_schedule/settings/
 ```
 3. local.pyを作成し,SECRET_KEYの作成．そして，以下を記述．
 ```python
-DEBUT = TRUE
+DEBUG = TRUE
 
 ALLOWED_HOSTS = []
 ```
@@ -69,9 +69,9 @@ docker-compose up
  
 # Author
  
-* 作成者　：　難波洸也
-* 所属　：　九州大学システム情報科学府
-* E-mail　：　namba.koya@arakawa-lab.com
+* 作成者 ： 難波洸也
+* 所属 ： 九州大学システム情報科学府
+* E-mail ： namba.koya@arakawa-lab.com
 * Portfolio : https://nmbsite.herokuapp.com/
 
 # License
