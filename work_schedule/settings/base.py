@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'staff',
     'schedule',
+    'article',
 ]
 
 MIDDLEWARE = [

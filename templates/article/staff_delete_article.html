@@ -1,0 +1,15 @@
+{% extends 'staff/staff_base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="card text-center contact mx-auto rounded">
+    <div class="card-body">
+        <form method="POST">
+            {%csrf_token %}
+            <p>{{ object.title }} を削除してよろしいですか</p>
+            <input type="submit" value="削除" class="btn btn-danger mr-3">
+            <a href="{% url 'staff:staff_home' %}" class="btn btn-dark"> キャンセル</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

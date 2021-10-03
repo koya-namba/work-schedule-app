@@ -7,40 +7,64 @@
         <div>{{ message.message }}</div>
     {% endfor %}
 {% endif %}
-<div class="card text-center contact mx-auto rounded mb-5 pd-5">
-    <div class="card-body">
-        <p class="mb-4">承認済みシフトの確認はこちら</p>
-        <div>
-            <a href="{% url 'schedule:staff_approved_schedule' %}" class="btn btn-warning"><i class="fas fa-calendar-check">　シフト確認</i></a>
+<div class="row">
+    <div class="col-12 col-md-12 col-lg-7 col-xl-7 mb-3">
+        {% for object in object_list %}
+            <div class="card contact mx-auto rounded mb-3">
+                <div class="card-body">
+                    <h3 class="text-center mb-3">{{ object.title }}</h3>
+                    <div class="text-center mb-3">
+                        <small class="mr-3">作成者 : {{ object.author.name }}</small>
+                        <small>投稿日時 : {{ object.posted_at | date:"Y年m月j日" }}</small>
+                    </div>
+                    <p>{{ object.text | linebreaksbr }}</p>
+                    <div class="mb-3 text-center all-center">
+                        {% if object.author.employee_id|stringformat:"s" == user.employee_id|stringformat:"s" %}
+                            <a href="{% url 'article:manager_update_article' object.id %}" class="btn btn-warning mr-3"> 更新</a>
+                            <a href="{% url 'article:manager_delete_article' object.id %}" class="btn btn-danger mr-3"> 削除</a>
+                        {% else %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="col-12 col-md-12 col-lg-5 col-xl-5 mb-3">
+        <div class="card text-center contact mx-auto rounded mb-5 pd-5">
+            <div class="card-body">
+                <p class="mb-4">承認済みシフトの確認はこちら</p>
+                <div>
+                    <a href="{% url 'schedule:staff_approved_schedule' %}" class="btn btn-warning"><i class="fas fa-calendar-check">　シフト確認</i></a>
+                </div>
+            </div>
+            <div class="card-body">
+                <p class="mb-4">シフト申請・変更・削除はこちら</p>
+                <div>
+                    <a href="{% url 'schedule:staff_application_schedule' %}" class="btn btn-warning"><i class="fas fa-calendar-alt">　シフト申請</i></a>
+                </div>
+            </div>
+            <div class="card-body">
+                <p class="mb-4">個人情報の確認・パスワードの変更はこちら</p>
+                <div>
+                    <a href="{% url 'staff:staff_information' %}" class="btn btn-warning"><i class="fas fa-clipboard">　個人情報確認</i></a>
+                </div>
+            </div>
+            <div class="card-body">
+                <p class="mb-4">スタッフへのお知らせの作成はこちら</p>
+                <div>
+                    <a href="{% url 'article:staff_create_article' %}" class="btn btn-warning"><i class="fas fa-chalkboard">　お知らせ作成</i></a>
+                </div>
+            </div>
+            {% if user.is_staff %}
+                <div class="card-body">
+                    <p class="mb-4">管理者ページはこちらから</p>
+                    <div>
+                        <a href="{% url 'staff:manager_home' %}" class="btn btn-warning"><i class="fas fa-address-card">　管理者ページ</i></a>
+                    </div>
+                </div>
+            {% else %}
+            {% endif %}
         </div>
     </div>
 </div>
-<div class="card text-center contact mx-auto rounded mb-5 pd-5">
-    <div class="card-body">
-        <p class="mb-4">シフト申請・変更・削除はこちら</p>
-        <div>
-            <a href="{% url 'schedule:staff_application_schedule' %}" class="btn btn-warning"><i class="fas fa-calendar-alt">　シフト申請</i></a>
-        </div>
-    </div>
-</div>
-<div class="card text-center contact mx-auto rounded mb-5 pd-5">
-    <div class="card-body">
-        <p class="mb-4">個人情報の確認・パスワードの変更はこちら</p>
-        <div>
-            <a href="{% url 'staff:staff_information' %}" class="btn btn-warning"><i class="fas fa-clipboard">　個人情報確認</i></a>
-        </div>
-    </div>
-</div>
-
-{% if user.is_staff %}
-<div class="card text-center contact mx-auto rounded">
-    <div class="card-body">
-        <p class="mb-4">管理者ページはこちらから</p>
-        <div>
-            <a href="{% url 'staff:manager_home' %}" class="btn btn-warning"><i class="fas fa-address-card">　管理者ページ</i></a>
-        </div>
-    </div>
-</div>
-{% else %}
-{% endif %}
 {% endblock %}

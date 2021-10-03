@@ -1,0 +1,23 @@
+{% extends 'staff/staff_base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="card text-center contact mx-auto rounded">
+    <div class="card-body">
+        <h2 class="mb-4">お知らせ作成</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                {% render_field form.title class='form-control' %}
+            </div>
+            <div class="mb-3">
+                {% render_field form.text class='form-control' %}
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-warning mr-3" type="submit"><i class="fa">作成</i></button>
+                <a href="{% url 'staff:staff_home' %}" class="btn btn-danger"><i class="fa">キャンセル</i></a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
