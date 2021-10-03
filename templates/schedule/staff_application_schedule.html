@@ -2,7 +2,7 @@
 {% load widget_tweaks %}
 
 {% block content %}
-<div class="card text-center contact mx-auto rounded">
+<div class="card text-center contact mx-auto rounded mb-5">
     <div class="card-body">
         <a href="{% url 'schedule:staff_application_schedule' month_previous.year month_previous.month %}" class="text-dark">前月</a>
         <span class="h3 mr-5 ml-5">{{ month_current | date:"Y年m月" }}</span>

@@ -11,6 +11,7 @@ from django.views.generic.list import ListView
 
 from .forms import LoginForm, ManagerStaffRegistForm, ManagerStaffUpdateForm, StaffChangePasswordForm
 from .models import User
+from article.models import Article
 
 
 class IndexView(TemplateView):
@@ -32,10 +33,16 @@ class ManagerMixin(UserPassesTestMixin):
         return self.request.user.is_staff
 
 
-class ManagerHomeView(ManagerMixin, TemplateView):
+class ManagerHomeView(ManagerMixin, ListView):
     """管理者のホーム画面のView"""
 
     template_name = 'staff/manager_home.html'
+    model = Article
+
+    def get_queryset(self):
+        qs = super(ManagerHomeView, self).get_queryset()
+        qs = qs.order_by('-posted_at')
+        return qs
 
 
 class ManagerLoginView(FormView):
@@ -119,10 +126,21 @@ class StaffChangePasswordDoneView(LoginRequiredMixin, PasswordChangeDoneView):
     template_name = 'staff/staff_change_password_done.html'
 
 
-class StaffHomeView(LoginRequiredMixin, TemplateView):
+class StaffHomeView(LoginRequiredMixin, ListView):
     """スタッフのホーム画面のView"""
 
     template_name = 'staff/staff_home.html'
+    model = Article
+
+    def get_queryset(self):
+        qs = super(StaffHomeView, self).get_queryset()
+        qs = qs.order_by('-posted_at')
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user'] = self.request.user
+        return context
 
 
 class StaffInformationView(LoginRequiredMixin, DetailView):
