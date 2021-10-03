@@ -1,6 +1,6 @@
 # シフト管理アプリ
 
-[HEROKU](https://workscheduleapp.herokuapp.com/)で試してみる
+[Heroku](https://workscheduleapp.herokuapp.com/)で試してみる
 
 スタッフログイン  
 ID：e001  
@@ -48,6 +48,15 @@ docker-compose up
 - Python
 - Django
 - Postgresql
-- HEROKU
+- Heroku
 - Docker
 
+## Future features
+
+- [x] お知らせ機能の作成
+- [] スタッフごとの月の総労働時間と給料
+- [] スタッフが不足している日の表示
+- [] 自動シフト作成機能
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
