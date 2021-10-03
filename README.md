@@ -19,3 +19,27 @@ PW:manager001
 
 ## Development
 
+Dockerを用いて簡単に環境構築を行うことができます．
+
+1.  Clone this repository
+```
+git clone https://github.com/koya-namba/work-schedule-app.git
+```
+2. Go into the repository
+```
+cd work-schedule-app
+```
+3.
+```
+docker-compose up
+```
+4.
+
+5.
+
+6.
+
+7.
+
+8.
+
