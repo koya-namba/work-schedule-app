@@ -11,6 +11,7 @@ PW:employee001
 ID:m001  
 PW:manager001
 
+<img width="1327" alt="スクリーンショット 2021-10-03 15 16 27" src="https://user-images.githubusercontent.com/82089820/135742481-7c8fd3ab-3fd5-4ba3-9fb5-03fcb6b3de4e.png">
 ## About
 
 シフトの管理をwebアプリで簡単に行うとができます．  
