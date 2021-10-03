@@ -54,9 +54,9 @@ docker-compose up
 ## Future features
 
 - [x] お知らせ機能の作成
-- [] スタッフごとの月の総労働時間と給料
-- [] スタッフが不足している日の表示
-- [] 自動シフト作成機能
+- [ ] スタッフごとの月の総労働時間と給料
+- [ ] スタッフが不足している日の表示
+- [ ] 自動シフト作成機能
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
