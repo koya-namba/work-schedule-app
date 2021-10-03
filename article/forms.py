@@ -17,7 +17,7 @@ class ManagerCreateArticleForm(forms.ModelForm):
 
 
 class ManagerUpdateArticleForm(forms.ModelForm):
-    """管理者が記事を更新するフォーム"""
+    """管理者がarticleを更新するフォーム"""
 
     class Meta:
         model = Article
@@ -43,7 +43,7 @@ class StaffCreateArticleForm(forms.ModelForm):
 
 
 class StaffUpdateArticleForm(forms.ModelForm):
-    """スタッフが記事を更新するフォーム"""
+    """スタッフがarticleを更新するフォーム"""
 
     class Meta:
         model = Article

@@ -19,9 +19,7 @@ class ManagerScheduleRegistForm(forms.ModelForm):
 
 
 class ManagerScheduleUpdateForm(forms.ModelForm):
-    """管理者がスケジュールを更新するフォーム
-    statusの初期値はapplication
-    """
+    """管理者がスケジュールを更新するフォーム"""
 
     class Meta:
         model = Schedule

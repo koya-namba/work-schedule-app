@@ -4,9 +4,9 @@ from staff.models import User
 
 
 class Article(models.Model):
-    """お知らせモデル"""
+    """articleモデル"""
     title = models.CharField(max_length=100)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='著者')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='作成者')
     text = models.TextField()
     posted_at = models.DateTimeField(auto_now_add=True)
     last_modify = models.DateTimeField(auto_now=True)

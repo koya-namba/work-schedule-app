@@ -31,7 +31,7 @@ class ManagerDeleteArticleView(ManagerMixin, DeleteView):
 
 
 class ManagerUpdateArticleView(ManagerMixin, UpdateView):
-    """管理者がスケジュールを更新するView"""
+    """管理者が記事を更新するView"""
 
     model = Article
     template_name = 'article/manager_update_article.html'
@@ -63,7 +63,7 @@ class StaffDeleteArticleView(LoginRequiredMixin, DeleteView):
 
 
 class StaffUpdateArticleView(LoginRequiredMixin, UpdateView):
-    """スタッフがスケジュールを更新するView"""
+    """スタッフが記事を更新するView"""
 
     model = Article
     template_name = 'article/staff_update_article.html'
