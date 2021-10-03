@@ -8,6 +8,20 @@
  
 # DEMO
 
+[こちら](https://workscheduleapp.herokuapp.com/)で試すことができます．
+
+スタッフにログインする際には，  
+ID : e001  
+PW : employee001
+
+管理者にログインする際には，  
+ID : m001  
+PW : manager001
+
+
+以下にWebアプリの画面を一部紹介します．
+
+
 管理者の全スタッフのシフト管理画面（承認する前は黄色のバックカラーが表示される）
 
 <img width="800" alt="スクリーンショット 2021-10-03 15 16 27" src="https://user-images.githubusercontent.com/82089820/135742481-7c8fd3ab-3fd5-4ba3-9fb5-03fcb6b3de4e.png">
