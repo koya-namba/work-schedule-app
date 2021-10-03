@@ -1,6 +1,6 @@
 # シフト管理アプリ
 
-[Heroku](https://workscheduleapp.herokuapp.com/)で試してみる
+[HEROKU](https://workscheduleapp.herokuapp.com/)で試してみる
 
 スタッフログイン  
 ID：e001  
@@ -21,25 +21,33 @@ PW:manager001
 
 Dockerを用いて簡単に環境構築を行うことができます．
 
-1.  Clone this repository
+1.  リポジトリをクローン
 ```
 git clone https://github.com/koya-namba/work-schedule-app.git
 ```
-2. Go into the repository
+2. リポジトリを移動
 ```
-cd work-schedule-app
+cd work-schedule-app/work_schedule/settings/
 ```
-3.
+3. local.pyを作成し,SECRET_KEYの作成．そして，以下を記述．
+```
+DEBUT = TRUE
+
+ALLOWED_HOSTS = []
+```
+4. リポジトリを移動
+```
+cd work-schedule-app/
+```
+5. コンテナを起動
 ```
 docker-compose up
 ```
-4.
 
-5.
-
-6.
-
-7.
-
-8.
+## Technology used
+- Python
+- Django
+- Postgresql
+- HEROKU
+- Docker
 
