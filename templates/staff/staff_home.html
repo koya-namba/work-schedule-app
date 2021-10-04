@@ -20,8 +20,8 @@
                     <p>{{ object.text | linebreaksbr }}</p>
                     <div class="mb-3 text-center all-center">
                         {% if object.author.employee_id|stringformat:"s" == user.employee_id|stringformat:"s" %}
-                            <a href="{% url 'article:manager_update_article' object.id %}" class="btn btn-warning mr-3"> 更新</a>
-                            <a href="{% url 'article:manager_delete_article' object.id %}" class="btn btn-danger mr-3"> 削除</a>
+                            <a href="{% url 'article:staff_update_article' object.id %}" class="btn btn-warning mr-3"> 更新</a>
+                            <a href="{% url 'article:staff_delete_article' object.id %}" class="btn btn-danger mr-3"> 削除</a>
                         {% else %}
                         {% endif %}
                     </div>
