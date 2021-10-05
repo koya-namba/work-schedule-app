@@ -128,10 +128,6 @@ class StaffScheduleDeleteView(LoginRequiredMixin, DeleteView, MonthMixin):
     template_name = 'schedule/staff_schedule_delete.html'
     success_url = reverse_lazy('schedule:staff_application_schedule')
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_month_calendar(**kwargs)
-    #     return context
-
 
 class StaffScheduleDayRegistView(LoginRequiredMixin, CreateView, MonthMixin):
     """スタッフが日付からスケジュールを作成するView"""
@@ -156,10 +152,6 @@ class StaffScheduleDayRegistView(LoginRequiredMixin, CreateView, MonthMixin):
         form.instance.status = status
         return super(StaffScheduleDayRegistView, self).form_valid(form)
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_month_calendar(**kwargs)
-    #     return context
-
 
 class StaffScheduleUpdateView(LoginRequiredMixin, UpdateView, MonthMixin):
     """スタッフがスケジュールを更新するView"""
@@ -171,6 +163,3 @@ class StaffScheduleUpdateView(LoginRequiredMixin, UpdateView, MonthMixin):
     def get_success_url(self):
         return reverse_lazy('schedule:staff_application_schedule')
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_month_calendar(**kwargs)
-    #     return context

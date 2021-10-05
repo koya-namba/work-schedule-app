@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.forms import PasswordChangeForm, PasswordResetForm, SetPasswordForm
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 
@@ -55,6 +55,24 @@ class ManagerStaffUpdateForm(forms.ModelForm):
 
 class StaffChangePasswordForm(PasswordChangeForm):
     """スタッフがパスワードを変更するフォーム"""
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
+
+
+class SMPasswordResetForm(PasswordResetForm):
+    """スタッフ・管理者がパスワードをリセットするためのメールアドレスを入力するForm"""
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
+
+
+class SMSetPasswordForm(SetPasswordForm):
+    """スタッフ・管理者がパスワードを変更するためのForm"""
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
