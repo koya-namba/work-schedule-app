@@ -1,7 +1,10 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
+from django.contrib.auth.views import (
+    PasswordChangeView, PasswordChangeDoneView, PasswordResetView, PasswordResetCompleteView, PasswordResetConfirmView,
+    PasswordResetDoneView
+)
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic.base import TemplateView, View
@@ -9,7 +12,10 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, FormView, UpdateView
 from django.views.generic.list import ListView
 
-from .forms import LoginForm, ManagerStaffRegistForm, ManagerStaffUpdateForm, StaffChangePasswordForm
+from .forms import (
+    LoginForm, ManagerStaffRegistForm, ManagerStaffUpdateForm, StaffChangePasswordForm,
+    SMPasswordResetForm, SMSetPasswordForm,
+)
 from .models import User
 from article.models import Article
 
@@ -169,3 +175,32 @@ class StaffLoginView(FormView):
         else:
             messages.warning(request, 'IDかパスワードが異なります')
             return redirect('staff:staff_login')
+
+
+class SMPasswordResetView(PasswordResetView):
+    """スタッフ・管理者がパスワードをリセットするのメールアドレス入力View"""
+
+    template_name = 'staff/password_reset.html'
+    form_class = SMPasswordResetForm
+    from_email = 'namba.koya@arakawa-lab.com'
+    success_url = reverse_lazy('password_reset_done')
+
+
+class SMPasswordResetDoneView(PasswordResetDoneView):
+    """スタッフ・管理者がパスワードリセットするためのメールを送信した後のView"""
+
+    template_name = 'staff/password_reset_done.html'
+
+
+class SMPasswordResetConfirmView(PasswordResetConfirmView):
+    """スタッフ・管理者がパスワードをリセットするためのView"""
+
+    template_name = 'staff/password_reset_confirmation.html'
+    form_class = SMSetPasswordForm
+    success_url = reverse_lazy('password_reset_complete')
+
+
+class SMPasswordResetCompleteView(PasswordResetCompleteView):
+    """スタッフ・管理者がパスワードを更新した後のView"""
+
+    template_name = 'staff/password_reset_complete.html'

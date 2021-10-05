@@ -15,10 +15,11 @@
             <div class="mb-3">
                 {% render_field form.employee_id class='form-control' placeholder='ID' %}
             </div>
-            <div class="mb-3">
+            <div class="mb-1">
                 {% render_field form.password class='form-control' placeholder='PassWord' %}
             </div>
-            <div class="mb-3">
+            <a href="{% url 'password_reset' %}" class="text-dark">パスワードを忘れてしまった方</a>
+            <div class="mt-4 mb-3">
                 <button class="btn btn-warning" type="submit"><i class="fas fa-paper-plane"> 送信する</i></button>
             </div>
         </form>
