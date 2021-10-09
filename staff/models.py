@@ -35,11 +35,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     """ユーザ(スタッフ)のモデル"""
 
     employee_id = models.CharField(max_length=20, unique=True)
-    name = models.CharField(max_length=20, null=True, blank=True)
-    birthday = models.DateField(null=True, blank=True)
-    tel_number = models.CharField(validators=[MinLengthValidator(9)], max_length=11, null=True, blank=True)
-    email = models.EmailField(max_length=255, null=True, blank=True)
-    zipcode = models.CharField(validators=[MinLengthValidator(7)], max_length=7, null=True, blank=True)
+    name = models.CharField(max_length=20)
+    birthday = models.DateField()
+    tel_number = models.CharField(validators=[MinLengthValidator(9)], max_length=11)
+    email = models.EmailField(max_length=255)
+    zipcode = models.CharField(validators=[MinLengthValidator(7)], max_length=7)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
